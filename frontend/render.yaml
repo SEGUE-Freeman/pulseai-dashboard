@@ -12,7 +12,7 @@ services:
       - key: NODE_VERSION
         value: 20.11.0
       - key: NEXT_PUBLIC_API_URL
-        value: https://pulseai-dashboard-backend.onrender.com
+        value: https://pulseai-dashboard.onrender.com
       - key: NEXT_PUBLIC_MOCK_MODE
         value: "false"
       - key: PORT

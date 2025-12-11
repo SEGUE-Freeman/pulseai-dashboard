@@ -1,6 +1,6 @@
 // API Client pour PulseAI Dashboard
 // Sanitize environment variables: trim, remove trailing slashes
-const rawApiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
+const rawApiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://pulseai-dashboard.onrender.com/api/v1';
 const cleanedBase = rawApiUrl.trim().replace(/\/+$/g, '');
 // Ensure base path includes "/api/v1" even if env var omitted it
 const API_URL = cleanedBase.match(/\/api\/v1$/) ? cleanedBase : `${cleanedBase}/api/v1`;
