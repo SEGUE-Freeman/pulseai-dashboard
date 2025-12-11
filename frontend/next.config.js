@@ -2,11 +2,9 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  // Active le mode standalone pour la production
-  output: 'standalone',
   env: {
-    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
-    NEXT_PUBLIC_MOCK_MODE: process.env.NEXT_PUBLIC_MOCK_MODE,
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'https://pulseai-dashboard-backend.onrender.com',
+    NEXT_PUBLIC_MOCK_MODE: process.env.NEXT_PUBLIC_MOCK_MODE || 'false',
   },
 }
 
