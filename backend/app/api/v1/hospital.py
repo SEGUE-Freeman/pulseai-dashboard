@@ -50,7 +50,7 @@ def get_dashboard(
     db: Session = Depends(get_db)
 ):
     # Récupérer les services de l'hôpital depuis la base de données
-    from app.db.models.service import Service
+    from app.db.models.services import Service
     from app.db.models.capacity import Capacity
     from app.db.models.location import Location
     

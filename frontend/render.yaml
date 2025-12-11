@@ -4,9 +4,10 @@ services:
     env: node
     region: frankfurt
     plan: free
-    branch: BENDOH
-    buildCommand: cd frontend && npm install && npm run build
-    startCommand: cd frontend && npm start
+    branch: main
+    rootDirectory: frontend
+    buildCommand: npm install && npm run build
+    startCommand: npm start
     envVars:
       - key: NODE_VERSION
         value: 18.17.0

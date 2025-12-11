@@ -6,7 +6,7 @@ from app.schemas.services import ServiceCreate, ServiceUpdate, ServiceResponse
 from app.api.v1.auth import get_current_hospital
 from app.db.session import get_db
 from app.db.models.hospital import Hospital
-from app.db.models.service import Service
+from app.db.models.services import Service
 
 router = APIRouter()
 
