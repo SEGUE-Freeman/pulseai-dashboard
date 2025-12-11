@@ -147,49 +147,55 @@ function mockRequest(endpoint, options = {}) {
 // Auth API
 export const authAPI = {
   async register(data) {
-    // Adapter les données pour Google Sheets
-    const sheetsData = {
-      nom: data.name,
+    // Adapter les données pour l'API standard
+    const registerData = {
+      name: data.name,
       email: data.email,
       password: data.password,
-      telephone: data.phone,
-      adresse: data.address,
-      ville: data.city,
+      phone: data.phone || '',
+      address: data.address || '',
+      city: data.city || '',
       region: data.region || '',
-      pays: data.country || 'Cameroun',
+      country: data.country || 'Cameroun',
       latitude: data.latitude || 0.0,
       longitude: data.longitude || 0.0,
-      description: data.description || '',
-      type_etablissement: data.type || 'Public',
-      nombre_lits: data.beds || 0,
-      horaires_ouverture: data.hours || '24h/24',
-      site_web: data.website || null
     };
-    return request('/auth-sheets/register', {
+    return request('/auth/register', {
       method: 'POST',
-      body: JSON.stringify(sheetsData),
+      body: JSON.stringify(registerData),
     });
   },
 
   async login(email, password) {
-    // Use Google Sheets auth endpoint
-    const response = await request('/auth-sheets/login', {
+    // Utiliser l'endpoint standard d'authentification
+    const formData = new URLSearchParams();
+    formData.append('username', email);
+    formData.append('password', password);
+    
+    const response = await fetch(`${API_URL}/auth/login`, {
       method: 'POST',
-      body: JSON.stringify({ email, password }),
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: formData,
     });
 
-    return response;
+    if (!response.ok) {
+      throw new Error('Échec de la connexion');
+    }
+
+    return response.json();
   },
 
   async getMe() {
-    return request('/auth-sheets/me');
+    return request('/hospital/me');
   },
 };
 
 // Hospital API
 export const hospitalAPI = {
   async getProfile() {
-    return request('/auth-sheets/me');
+    return request('/hospital/me');
   },
 
   async updateProfile(data) {
