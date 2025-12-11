@@ -22,9 +22,13 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
+        # Local development
         "http://localhost:3000",
         "http://localhost:3001",
         "http://localhost:3002",
+        # Render deployment
+        "https://pulseai-dashboard-frontend.onrender.com",
+        # Vercel deployments
         "https://pulseai-dashboard.vercel.app",
         "https://frontend-5t5n42vm1-light667s-projects.vercel.app",
         # Firebase Hosting domains (Flutter Web)
@@ -33,8 +37,8 @@ app.add_middleware(
         "https://pulseai-a0548.web.app",
         "https://pulseai-a0548.firebaseapp.com",
     ],
-    # Allow Vercel subdomains and Firebase Hosting subdomains
-    allow_origin_regex="https://.*\\.vercel\\.app|https://.*\\.web\\.app|https://.*\\.firebaseapp\\.com",
+    # Allow Render, Vercel and Firebase subdomains
+    allow_origin_regex="https://.*\\.onrender\\.com|https://.*\\.vercel\\.app|https://.*\\.web\\.app|https://.*\\.firebaseapp\\.com",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
