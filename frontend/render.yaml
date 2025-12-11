@@ -10,9 +10,11 @@ services:
     startCommand: npm start
     envVars:
       - key: NODE_VERSION
-        value: 18.17.0
+        value: 20.11.0
       - key: NEXT_PUBLIC_API_URL
-        sync: false
+        value: https://pulseai-dashboard-backend.onrender.com
+      - key: NEXT_PUBLIC_MOCK_MODE
+        value: "false"
       - key: PORT
-        value: 3001
+        value: 10000
     healthCheckPath: /
