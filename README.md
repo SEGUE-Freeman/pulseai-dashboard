@@ -1,150 +1,52 @@
 # PulseAI Hospital Dashboard
 
-Tableau de bord web pour la gestion hospitalière PulseAI avec backend FastAPI et frontend Next.js.
+Prototype de tableau de bord web pour la gestion d'informations hospitalières. Le dépôt réunit une API FastAPI et une interface Next.js. Le projet est présenté comme un prototype logiciel ; il ne constitue pas un système validé pour un usage clinique ou opérationnel.
 
-## 🏗️ Architecture
+## Architecture
 
-- **Backend** : FastAPI (Python) - API REST pour la gestion des données
-- **Frontend** : Next.js (React) - Interface utilisateur moderne
-- **Déploiement** : Render.com
+- `backend/` : API REST FastAPI, routes d'authentification, hôpitaux, services, capacités, localisation et équipements.
+- `frontend/` : interface Next.js et React, lancée par défaut sur le port 3001.
+- `DEPLOY_RENDER.md` : notes de déploiement, si vous choisissez Render.
 
-## 📁 Structure du Projet
+## Démarrage local
 
-```
-pulseai-dashboard-repo/
-├── backend/                 # API FastAPI
-│   ├── app/
-│   │   ├── api/            # Routes API
-│   │   ├── core/           # Configuration
-│   │   ├── db/             # Base de données
-│   │   └── main.py         # Point d'entrée
-│   ├── Dockerfile
-│   ├── render.yaml
-│   └── requirements.txt
-│
-├── frontend/                # Application Next.js
-│   ├── src/
-│   │   ├── app/            # Pages et layouts
-│   │   ├── components/     # Composants React
-│   │   ├── contexts/       # Contextes React
-│   │   └── lib/            # Utilitaires
-│   ├── public/
-│   ├── render.yaml
-│   └── package.json
-│
-└── DEPLOY_RENDER.md        # Guide de déploiement
-```
+### API
 
-## 🚀 Installation Locale
-
-### Backend
+Depuis le dossier `backend` :
 
 ```bash
-cd backend
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
+python -m venv .venv
+# Windows : .venv\Scripts\activate
+# macOS / Linux : source .venv/bin/activate
 pip install -r requirements.txt
 uvicorn app.main:app --reload --port 8000
 ```
 
-### Frontend
+Documentation interactive : <http://localhost:8000/docs>.
+
+### Interface
+
+Depuis le dossier `frontend` :
 
 ```bash
-cd frontend
 npm install
 npm run dev
 ```
 
-Accédez à :
-- Backend API: http://localhost:8000
-- Frontend: http://localhost:3001
-- Documentation API: http://localhost:8000/docs
+L'interface est disponible sur <http://localhost:3001>. Configurez son URL d'API dans son fichier d'environnement local selon la configuration du backend.
 
-## 🌐 Déploiement sur Render
+## Configuration
 
-Suivez le guide complet dans `DEPLOY_RENDER.md` pour déployer sur Render.com.
+Le backend charge sa configuration depuis l'environnement et un fichier local `.env`. Consultez `backend/app/core/config.py` pour les noms de variables attendus. Ne publiez pas de clés, mots de passe, jetons ou fichiers de credentials.
 
-### Résumé Rapide
+## Technologies
 
-1. Créer un compte sur https://render.com
-2. Connecter votre dépôt GitHub
-3. Créer deux Web Services (backend et frontend)
-4. Configurer les variables d'environnement
-5. Déployer !
+FastAPI, SQLAlchemy, Pydantic, Next.js 13, React 18, Tailwind CSS, Chart.js et Leaflet.
 
-## 🔐 Variables d'Environnement
+## Limites et données
 
-### Backend (.env)
-```env
-SECRET_KEY=your-secret-key
-ALGORITHM=HS256
-ACCESS_TOKEN_EXPIRE_MINUTES=30
-DATABASE_URL=your-database-url
-GOOGLE_SHEETS_CREDENTIALS=your-google-credentials
-GOOGLE_SHEETS_SPREADSHEET_ID=your-spreadsheet-id
-```
+Le code inclut des fonctionnalités d'authentification et de gestion de données hospitalières. N'y connectez pas de données réelles, personnelles ou médicales sans autorisation explicite, contrôle d'accès, protection des secrets et examen de sécurité adaptés. Les routes Google Sheets sont désactivées dans le point d'entrée actuel.
 
-### Frontend (.env.local)
-```env
-NEXT_PUBLIC_API_URL=http://localhost:8000
-```
+## État du projet
 
-## 📊 Fonctionnalités
-
-- 🏥 Gestion des hôpitaux
-- 👨‍⚕️ Gestion des médecins
-- 🛏️ Gestion des lits et chambres
-- 📈 Visualisation des capacités
-- 🗺️ Carte interactive des hôpitaux
-- 📊 Tableaux de bord et statistiques
-- 🔐 Authentification et autorisation
-
-## 🛠️ Technologies
-
-### Backend
-- FastAPI
-- Uvicorn
-- Pydantic
-- SQLAlchemy
-- Google Sheets API
-- Python-Jose (JWT)
-
-### Frontend
-- Next.js 13
-- React 18
-- Tailwind CSS
-- Chart.js
-- Leaflet (cartes)
-- React Context API
-
-## 📝 API Endpoints
-
-- `GET /` - Informations sur l'API
-- `GET /docs` - Documentation Swagger interactive
-- `GET /api/v1/hospitals` - Liste des hôpitaux
-- `POST /api/v1/auth/login` - Authentification
-- Plus d'endpoints dans la documentation
-
-## 🤝 Contribution
-
-1. Forkez le projet
-2. Créez une branche (`git checkout -b feature/AmazingFeature`)
-3. Committez vos changements (`git commit -m 'Add AmazingFeature'`)
-4. Pushez vers la branche (`git push origin feature/AmazingFeature`)
-5. Ouvrez une Pull Request
-
-## 📄 Licence
-
-Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
-
-## 🐛 Support
-
-Pour signaler un bug ou demander une fonctionnalité, ouvrez une issue sur GitHub.
-
-## 👥 Auteurs
-
-- **Neuractif Initiatives** - PulseAI Team
-
----
-
-Fait avec ❤️ pour améliorer la gestion hospitalière
+Ce dépôt documente une application en développement. Vérifiez la configuration, les dépendances et les limites du code avant toute mise en service.
